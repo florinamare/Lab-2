@@ -1,9 +1,6 @@
 package ex2;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 class Vers {
     private String text;
@@ -71,17 +68,11 @@ public class MainApp {
         try {
             File file = new File(numeFisier);
             Scanner scanner = new Scanner(file);
-            int numarVersuri = 0;
+            List<Vers> versuri = new ArrayList<>();
             while (scanner.hasNextLine()) {
-                numarVersuri++;
-                scanner.nextLine();
+                versuri.add(new Vers(scanner.nextLine()));
             }
-            Vers[] versuri = new Vers[numarVersuri];
-            scanner = new Scanner(file);
-            for (int i = 0; i < numarVersuri; i++) {
-                versuri[i] = new Vers(scanner.nextLine());
-            }
-            return versuri;
+            return versuri.toArray(new Vers[0]);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
